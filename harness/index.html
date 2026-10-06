@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <title>編輯器 harness（假主平台）</title>
+    <style>
+      body { margin: 0; font: 13px system-ui, sans-serif; display: grid; grid-template-columns: 1fr 340px; height: 100vh; }
+      iframe { width: 100%; height: 100%; border: 0; border-right: 1px solid #ccc; }
+      aside { padding: 8px; overflow: auto; display: flex; flex-direction: column; gap: 6px; }
+      button, select, label { font: inherit; }
+      fieldset { display: flex; flex-wrap: wrap; gap: 4px; }
+      #log { flex: 1; font: 11px ui-monospace, monospace; white-space: pre-wrap; background: #111; color: #cfc; padding: 6px; overflow: auto; margin: 0; }
+    </style>
+  </head>
+  <body>
+    <iframe id="editor" src="http://localhost:5173/" title="積木編輯器"></iframe>
+    <aside>
+      <fieldset>
+        <legend>LOAD_PROJECT</legend>
+        <select id="ptype"><option>classwork</option><option>assignment</option></select>
+        <label><input type="checkbox" id="ro" /> readonly</label>
+        <button id="load-blank">空白專案</button>
+        <label>選 .sb3 <input type="file" id="file" accept=".sb3" /></label>
+        <button id="load-corrupt">損壞內容</button>
+        <button id="load-expired">過期權杖</button>
+        <button id="load-badtoken">亂碼權杖</button>
+        <button id="load-twice">連送兩次</button>
+      </fieldset>
+      <fieldset>
+        <legend>其他</legend>
+        <button id="snap-auto">快照 autosave</button>
+        <button id="snap-submit">快照 submit 並下載</button>
+        <button id="ro-on">SET_READONLY true</button>
+        <button id="ro-off">SET_READONLY false</button>
+        <button id="bad-version">主版本 2.0</button>
+        <button id="reload">重載 iframe</button>
+      </fieldset>
+      <pre id="log"></pre>
+    </aside>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "name": "block-editor-host",
+  "version": "0.1.0",
+  "private": true,
+  "license": "AGPL-3.0-only",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "harness": "vite --config harness/vite.config.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "postinstall": "node scripts/copy-gui.mjs",
+    "prebuild": "node scripts/copy-gui.mjs",
+    "mirror-assets": "node scripts/mirror-library-assets.mjs",
+    "dev-keys": "node scripts/dev-keys.mjs"
+  },
+  "dependencies": {
+    "@scratch/scratch-gui": "15.1.1",
+    "jose": "6.2.12"
+  },
+  "devDependencies": {
+    "jsdom": "29.1.1",
+    "typescript": "5.9.3",
+    "vite": "8.3.0",
+    "vitest": "5.0.1"
+  }
+}

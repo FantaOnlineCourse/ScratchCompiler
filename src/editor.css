@@ -1,0 +1,39 @@
+html, body, #app { margin: 0; height: 100%; overflow: hidden; }
+body { font-family: "Helvetica Neue", Helvetica, Arial, "Noto Sans TC", "Microsoft JhengHei", sans-serif; background: #fff; }
+
+#screen {
+  position: fixed; inset: 0; z-index: 10000;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 24px; text-align: center; background: #f5f7fb; color: #33415c;
+}
+#screen[hidden] { display: none; }
+#screen h1 { font-size: 20px; margin: 0 0 8px; }
+#screen p { font-size: 14px; margin: 0; max-width: 32em; line-height: 1.6; }
+
+#source-link {
+  position: fixed; right: 8px; bottom: 4px; z-index: 10001;
+  font-size: 11px; color: #6b7a99; text-decoration: none; opacity: .75;
+}
+#source-link:hover { opacity: 1; text-decoration: underline; }
+
+/* 商標：不顯示 Scratch 標誌（本版 scratch-gui 忽略 logo 屬性）。
+   教學：教學影片來自外部影音平台，違反 FR-EDT-012，整個按鈕移除。 */
+button:has(> #logo_img),
+.tutorials-button {
+  display: none !important;
+}
+
+/* ── 唯讀模式（FR-EDT-006），搭配 editor/readonly.ts ─────────────────── */
+html.readonly [class*="gui_menu-bar-position_"],
+html.readonly .blocklyToolboxDiv,
+html.readonly .blocklyToolbox,
+html.readonly .blocklyFlyout,
+html.readonly .blocklyFlyoutScrollbar,
+html.readonly [class*="sprite-selector_add-button_"],
+html.readonly [class*="stage-selector_add-button_"],
+html.readonly [class*="extension-button-container_"],
+html.readonly [class*="delete-button_delete-button_"],
+html.readonly [class*="gui_tab-list_"] > li:not(:first-child) {
+  display: none !important;
+}
+html.readonly [class*="sprite-info_sprite-info_"] { pointer-events: none; opacity: .6; }

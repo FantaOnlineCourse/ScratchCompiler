@@ -1,0 +1,12 @@
+node_modules/
+dist/
+# 由 scripts/copy-gui.mjs 與 scripts/mirror-library-assets.mjs 產生，不進版控
+public/gui/
+public/chunks/
+public/static/
+public/library-assets/
+public/*.hex
+public/extension-worker.js*
+.env
+.env.local
+harness/.env.local
