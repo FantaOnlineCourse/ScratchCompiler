@@ -36,6 +36,12 @@ describe("createTokenVerifier", () => {
     expect(await verify("not.a.jwt")).toEqual({ ok: false, reason: "invalid" });
   });
 
+  it("接受換行寫成 \\n 兩個字元的單行公鑰（部署環境變數的格式）", async () => {
+    const oneLine = (await exportSPKI(pair.publicKey)).trim().replace(/\n/g, "\\n");
+    expect(oneLine).not.toContain("\n");
+    expect(await createTokenVerifier(oneLine)(await sign())).toEqual({ ok: true });
+  });
+
   it("公鑰設定錯誤時一律無效，不會拋錯", async () => {
     const broken = createTokenVerifier("-----BEGIN PUBLIC KEY-----\ngarbage\n-----END PUBLIC KEY-----");
     expect(await broken(await sign())).toEqual({ ok: false, reason: "invalid" });

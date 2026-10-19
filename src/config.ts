@@ -4,8 +4,8 @@
  */
 const env = import.meta.env;
 
-/** 主平台簽發嵌入權杖所用私鑰對應的 ES256 公鑰（SPKI PEM）。.env 內可用 \n 表示換行。 */
-export const TOKEN_PUBLIC_KEY: string = (env.VITE_TOKEN_PUBLIC_KEY ?? "").replace(/\n/g, "\n");
+/** 主平台簽發嵌入權杖所用私鑰對應的 ES256 公鑰（SPKI PEM）。可用 \n 表示換行，由 token.ts 還原。 */
+export const TOKEN_PUBLIC_KEY: string = env.VITE_TOKEN_PUBLIC_KEY ?? "";
 
 /** 允許嵌入本應用的主平台來源，逗號分隔。例：https://course.fantageeks.com */
 export const ALLOWED_ORIGINS: readonly string[] = (env.VITE_ALLOWED_ORIGINS ?? "")

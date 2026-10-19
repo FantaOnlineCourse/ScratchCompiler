@@ -17,7 +17,9 @@ export type TokenVerifier = (token: string) => Promise<TokenCheck>;
 
 export function createTokenVerifier(publicKeyPem: string): TokenVerifier {
   // 金鑰只匯入一次；匯入失敗（設定錯誤）時，所有權杖一律視為無效。
-  const key = importSPKI(publicKeyPem, ALG).catch(() => null);
+  // 部署環境的變數欄位是單行，PEM 的換行寫成 `\n` 兩個字元，這裡還原成真正的換行。
+  // 本機 .env 的雙引號值 Vite 會自己還原，Vercel 不會 —— 少了這行，正式環境每張權杖都驗不過。
+  const key = importSPKI(publicKeyPem.replace(/\\n/g, "\n"), ALG).catch(() => null);
 
   return async (token) => {
     const k = await key;
